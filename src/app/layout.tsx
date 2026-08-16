@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost, Noto_Sans_Kannada } from "next/font/google";
 import { weddingConfig } from "@/config/wedding";
 import { InvitationProvider } from "@/components/providers/InvitationProvider";
+import { ContentProtection } from "@/components/providers/ContentProtection";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     title,
     description,
   },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false, nocache: true },
 };
 
 export const viewport: Viewport = {
@@ -70,7 +71,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable} ${kannada.variable}`}>
       <body>
-        <InvitationProvider>{children}</InvitationProvider>
+        <InvitationProvider>
+          <ContentProtection />
+          {children}
+        </InvitationProvider>
       </body>
     </html>
   );
