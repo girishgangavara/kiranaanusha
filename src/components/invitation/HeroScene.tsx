@@ -113,7 +113,7 @@ export function HeroScene() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: reduce ? 0 : 1.25 }}
         >
-          {wedding.malayalamDate} <span className="mx-2 text-gold">·</span> {wedding.time}
+          {wedding.time}
         </motion.p>
       </div>
 

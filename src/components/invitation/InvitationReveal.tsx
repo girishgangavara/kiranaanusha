@@ -61,9 +61,6 @@ export function InvitationReveal() {
                 </div>
                 <div className="text-left">
                   <p className="label-caps text-[0.5rem] text-ink-soft">{wedding.time}</p>
-                  <p className="label-caps mt-1 text-[0.5rem] text-ink-soft">
-                    {wedding.malayalamDate}
-                  </p>
                 </div>
               </div>
 

@@ -28,18 +28,31 @@ export const weddingConfig = {
 
   wedding: {
     /** ISO 8601 with the India offset - drives the countdown. */
-    dateISO: "2026-09-10T10:10:00+05:30",
-    dayName: "Thursday",
-    dateLabel: "10 September 2026",
-    /** Malayalam calendar date shown alongside, as in the reference card. */
-    malayalamDate: "Chingam 25, 1202",
-    time: "10:10 AM — 10:50 AM",
-    muhurthamNote:
-      "The groom's party leaves at 8:45 AM. Solemnised according to traditional Kerala Hindu rituals within the auspicious muhurtham.",
+    dateISO: "2026-08-31T10:00:00+05:30",
+    dayName: "Monday",
+    dateLabel: "31 August 2026",
+    /** Set the muhurtham time here; it also drives the countdown above. */
+    time: "ADD TIME",
     ceremony: "Wedding Ceremony",
-    venue: "AL Saj Convention Centre",
-    address: "Vellayani, Nemom, Thiruvananthapuram, Kerala",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=AL+Saj+Convention+Centre+Vellayani+Nemom+Thiruvananthapuram",
+    venue: "ADD VENUE",
+
+    /** The celebrations, in order. Add or remove entries freely. */
+    events: [
+      {
+        name: "Reception",
+        dayName: "Sunday",
+        dateLabel: "30 August 2026",
+        time: "From 7:00 PM",
+      },
+      {
+        name: "Wedding Ceremony",
+        dayName: "Monday",
+        dateLabel: "31 August 2026",
+        time: "ADD TIME",
+      },
+    ],
+    address: "Bengaluru, Karnataka",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Bengaluru+Karnataka",
   },
 
   contact: {
