@@ -1,26 +1,249 @@
 @import "tailwindcss";
 
+/*
+  Design tokens sampled from the reference invitation video:
+  ivory paper, antique gold foil, warm brown ink, and the near-black
+  ground used behind the couple portraits.
+*/
+@theme {
+  --color-ivory: #f8f3e8;
+  --color-cream: #efe4cf;
+  --color-paper: #fbf7ee;
+  --color-paper-warm: #f4ead8;
+  --color-gold: #b08a45;
+  --color-gold-light: #d7bd7b;
+  --color-gold-deep: #8a6a2f;
+  --color-brown: #4a3425;
+  --color-ink: #3b2a1e;
+  --color-ink-soft: #6b5847;
+  --color-night: #170d08;
+  --color-night-soft: #241610;
+  --color-leaf: #5c6b4a;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-label: var(--font-jost), "Jost", system-ui, sans-serif;
+  --font-kannada: var(--font-kannada), "Noto Sans Kannada", system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gold: #b08a45;
+  --gold-light: #d7bd7b;
+  --ivory: #f8f3e8;
+  --cream: #efe4cf;
+  --brown: #4a3425;
+  --paper: #fbf7ee;
+  --shadow: 0 24px 60px -28px rgba(58, 38, 18, 0.45);
+  --shadow-card: 0 18px 44px -22px rgba(58, 38, 18, 0.38);
+  --shadow-print: 0 14px 30px -14px rgba(40, 26, 14, 0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--ivory);
+  color: #3b2a1e;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Locks scrolling while the envelope is still sealed. */
+body[data-sealed="true"] {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------ typography */
+.label-caps {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-weight: 400;
+}
+
+.display-name {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+[lang="kn"] .label-caps {
+  letter-spacing: 0.12em;
+}
+
+/* --------------------------------------------------------------- surfaces */
+/* Woven paper grain - two hairline gradients rather than a bitmap, so it
+   costs nothing to download and never blurs on a dense phone screen. */
+.paper {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(176, 138, 69, 0.028) 0px,
+      rgba(176, 138, 69, 0.028) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(176, 138, 69, 0.028) 0px,
+      rgba(176, 138, 69, 0.028) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.gold-rule {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-light) 18%,
+    var(--gold) 50%,
+    var(--gold-light) 82%,
+    transparent
+  );
+}
+
+.gold-text {
+  background: linear-gradient(100deg, #8a6a2f 0%, #d7bd7b 42%, #b08a45 62%, #8a6a2f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--gold);
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gold-text {
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+/* Warm light bloom behind the hero and final scenes. */
+.warm-bloom {
+  background:
+    radial-gradient(120% 70% at 50% 8%, rgba(255, 236, 196, 0.85) 0%, transparent 62%),
+    radial-gradient(90% 60% at 50% 100%, rgba(214, 178, 116, 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, #f6ecd9 0%, #f2e5cd 45%, #eddcc0 100%);
+}
+
+.night-bloom {
+  background:
+    radial-gradient(70% 50% at 50% 0%, rgba(176, 138, 69, 0.22) 0%, transparent 60%),
+    radial-gradient(60% 40% at 50% 100%, rgba(176, 138, 69, 0.14) 0%, transparent 65%),
+    linear-gradient(180deg, #170d08 0%, #241610 50%, #170d08 100%);
+}
+
+/* Card edge treatment used on the printed cards in the video. */
+.foil-frame {
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+
+.foil-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border: 1px solid rgba(176, 138, 69, 0.45);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Printed photographs only fan out once there is room for them; on a phone
+   they stack straight so nothing is pushed under the edge of the screen. */
+.print-offset {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .print-offset {
+    transform: translate(var(--dx, 0px), var(--dy, 0px));
+  }
+}
+
+/* --------------------------------------------------------------- motion */
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  35% { opacity: 0.82; transform: scaleY(0.94) translateY(0.5px); }
+  60% { opacity: 0.95; transform: scaleY(1.03); }
+  80% { opacity: 0.86; transform: scaleY(0.97); }
+}
+
+.flame {
+  transform-origin: 50% 100%;
+  animation: flicker 2.4s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12% { opacity: 0.7; }
+  88% { opacity: 0.55; }
+  100% { transform: translate3d(14px, -120px, 0); opacity: 0; }
+}
+
+.mote {
+  animation: drift linear infinite;
+  will-change: transform, opacity;
+}
+
+/* The mote gradients live here rather than in inline styles: the browser
+   rewrites an inline `background` shorthand into longhands, which no longer
+   matches what React wrote and trips hydration. */
+.mote-gold {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 236, 190, 0.95) 0%,
+    rgba(214, 178, 116, 0.5) 55%,
+    transparent 70%
+  );
+}
+
+.mote-light {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 240, 214, 0.4) 55%,
+    transparent 70%
+  );
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+
+.sway {
+  transform-origin: 50% 0%;
+  animation: sway 6s ease-in-out infinite;
+}
+
+/* Focus ring that reads on both the ivory and night grounds. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flame,
+  .mote,
+  .sway {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
