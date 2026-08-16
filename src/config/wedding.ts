@@ -50,8 +50,8 @@ export const weddingConfig = {
 
   music: {
     enabled: true,
-    /** Drop your track at public/music/wedding.mp3 - control appears regardless. */
-    source: "/music/wedding.mp3",
+    /** Track extracted from the reference invitation video. */
+    source: "/music/wedding.m4a",
   },
 
   gallery: [
