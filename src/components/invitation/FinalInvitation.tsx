@@ -24,7 +24,7 @@ export function FinalInvitation() {
 
   return (
     <section
-      className="warm-bloom relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20"
+      className="parchment-scene relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20"
       aria-label="With love"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">

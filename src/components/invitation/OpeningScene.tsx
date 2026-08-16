@@ -21,19 +21,26 @@ import { SealedLanguageToggle } from "@/components/ui/FloatingControls";
  * has to be on screen the instant the page paints.
  */
 
-/* Frames 1-4 carry the film's own title plate burnt in, so the sequence
-   starts at the first clean frame. */
-const FRAMES = [5, 6, 7, 8].map(
+/* Only two frames of the film are usable: 1-4 carry its burnt-in title plate,
+   and 7-8 show the printed card face, which bears the other couple's names.
+   The sequence therefore runs sealed envelope -> open envelope and stops
+   before the card is legible. */
+const FRAMES = [5, 6].map(
   (n) => `/images/envelope/seq-${String(n).padStart(2, "0")}.jpg`,
 );
 
-/** Per-frame hold. Eight frames ≈ 1.7s, close to the film's own pacing. */
-const FRAME_MS = 210;
+/** Per-frame hold — the film takes about four seconds to open the envelope,
+    so each frame dissolves slowly rather than cutting. */
+const FRAME_MS = 1500;
+
+/** Beat spent on the fully open card before the invitation takes over. */
+const HOLD_MS = 1500;
 
 export function OpeningScene() {
-  const { opened, open, t } = useInvitation();
+  const { open, t } = useInvitation();
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [finished, setFinished] = useState(false);
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
@@ -51,16 +58,32 @@ export function OpeningScene() {
     for (let i = 1; i < FRAMES.length; i++) {
       timers.current.push(window.setTimeout(() => setFrame(i), i * FRAME_MS));
     }
+
+    // Hold on the open card, then dissolve to the invitation.
+    timers.current.push(
+      window.setTimeout(
+        () => setFinished(true),
+        (FRAMES.length - 1) * FRAME_MS + HOLD_MS,
+      ),
+    );
   }, [open, playing]);
 
-  if (opened && frame >= FRAMES.length - 1) return null;
+  // Unmount only after the fade-out has run.
+  const [gone, setGone] = useState(false);
+  useEffect(() => {
+    if (!finished) return;
+    const id = window.setTimeout(() => setGone(true), 1100);
+    return () => window.clearTimeout(id);
+  }, [finished]);
+
+  if (gone) return null;
 
   return (
     <div
       className="fixed inset-0 z-[60] overflow-hidden bg-[#1b1008]"
       style={{
-        opacity: opened && playing && frame >= FRAMES.length - 1 ? 0 : 1,
-        transition: "opacity 900ms ease",
+        opacity: finished ? 0 : 1,
+        transition: "opacity 1100ms ease",
       }}
     >
       {/* the set, cross-fading frame to frame */}
@@ -75,10 +98,10 @@ export function OpeningScene() {
           className="object-cover"
           style={{
             opacity: i === frame ? 1 : 0,
-            transition: `opacity ${FRAME_MS}ms linear`,
-            transform: playing ? "scale(1.04)" : "scale(1)",
+            transition: `opacity ${FRAME_MS}ms ease-in-out`,
+            transform: playing ? "scale(1.06)" : "scale(1)",
             transitionProperty: "opacity, transform",
-            transitionDuration: `${FRAME_MS}ms, 2400ms`,
+            transitionDuration: `${FRAME_MS}ms, 5200ms`,
           }}
           aria-hidden="true"
         />
@@ -98,7 +121,7 @@ export function OpeningScene() {
         className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
         style={{
           opacity: playing ? 0 : 1,
-          transition: "opacity 600ms ease",
+          transition: "opacity 900ms ease",
           pointerEvents: playing ? "none" : "auto",
         }}
       >

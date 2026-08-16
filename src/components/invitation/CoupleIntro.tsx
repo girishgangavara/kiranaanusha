@@ -19,7 +19,7 @@ export function CoupleIntro() {
 
   return (
     <section
-      className="night-bloom relative overflow-hidden px-5 py-20 sm:py-28"
+      className="night-scene relative overflow-hidden px-5 py-20 sm:py-28"
       aria-label="The couple"
     >
       <Particles count={22} tone="light" />
@@ -40,7 +40,7 @@ export function CoupleIntro() {
             <div className="relative rounded-t-[999px] rounded-b-xl border border-gold/35 p-1.5">
               <PhotoFrame
                 src={couplePhoto}
-                alt={`${groom.name} and ${bride.name}`}
+                alt={`${groom.shortName} and ${bride.shortName}`}
                 shape="arch"
                 priority
                 className="h-[22rem] w-[15rem] sm:h-[30rem] sm:w-[21rem]"
@@ -51,9 +51,9 @@ export function CoupleIntro() {
         </Reveal>
 
         <Reveal delay={0.24}>
-          <h2 className="display-name mt-12 text-4xl text-ivory sm:text-5xl">{groom.name}</h2>
+          <h2 className="display-name mt-12 text-4xl text-ivory sm:text-5xl">{groom.shortName}</h2>
           <p className="my-2 text-2xl font-light italic text-gold">&amp;</p>
-          <h2 className="display-name text-4xl text-ivory sm:text-5xl">{bride.name}</h2>
+          <h2 className="display-name text-4xl text-ivory sm:text-5xl">{bride.shortName}</h2>
         </Reveal>
 
         <Reveal delay={0.34}>

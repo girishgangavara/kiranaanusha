@@ -20,7 +20,7 @@ export function WeddingDetails() {
   return (
     <section
       id="details"
-      className="relative overflow-hidden bg-ivory px-5 py-20 sm:py-28"
+      className="parchment-scene relative overflow-hidden px-5 py-20 sm:py-28"
       aria-label="Wedding details"
     >
       <div className="mx-auto w-full max-w-2xl">

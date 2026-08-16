@@ -23,7 +23,7 @@ export function InvitationReveal() {
   const year = part({ year: "numeric" });
 
   return (
-    <section className="relative overflow-hidden bg-ivory px-5 py-20 sm:py-28" aria-label="Invitation">
+    <section className="parchment-scene relative overflow-hidden px-5 py-20 sm:py-28" aria-label="Invitation">
       <div className="mx-auto w-full max-w-lg">
         <Reveal>
           <article className="paper foil-frame relative overflow-hidden rounded-md border border-gold/35 px-6 pb-8 pt-10 sm:px-10 sm:pb-10 sm:pt-12">
@@ -40,9 +40,9 @@ export function InvitationReveal() {
               </p>
               <p className="mt-3 text-sm text-ink-soft sm:text-base">{t.invitation.line}</p>
 
-              <h2 className="display-name mt-7 text-4xl text-ink sm:text-5xl">{groom.name}</h2>
+              <h2 className="display-name mt-7 text-4xl text-ink sm:text-5xl">{groom.shortName}</h2>
               <p className="my-2 text-lg font-light italic text-gold">{t.invitation.and}</p>
-              <h2 className="display-name text-4xl text-ink sm:text-5xl">{bride.name}</h2>
+              <h2 className="display-name text-4xl text-ink sm:text-5xl">{bride.shortName}</h2>
 
               <OrnamentalDivider className="mt-8" />
 

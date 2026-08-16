@@ -18,7 +18,7 @@ export function VenueSection() {
 
   return (
     <section
-      className="night-bloom relative overflow-hidden px-5 py-20 sm:py-28"
+      className="night-scene relative overflow-hidden px-5 py-20 sm:py-28"
       aria-label="Venue"
     >
       <Particles count={16} tone="light" />

@@ -29,7 +29,7 @@ export function HeroScene() {
 
   return (
     <section
-      className="warm-bloom relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-16"
+      className="parchment-scene relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-16"
       aria-label="Wedding invitation title"
     >
       {/* slow cinematic push-in on the decorative layer only */}

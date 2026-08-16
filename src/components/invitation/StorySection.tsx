@@ -17,7 +17,7 @@ export function StorySection() {
   const { t } = useInvitation();
 
   return (
-    <section id="story" className="relative overflow-hidden bg-ivory px-5 py-20 sm:py-28" aria-label="Our story">
+    <section id="story" className="parchment-scene relative overflow-hidden px-5 py-20 sm:py-28" aria-label="Our story">
       <div className="mx-auto w-full max-w-2xl">
         <Reveal>
           <SectionHeading eyebrow={t.story.eyebrow} title={t.story.title} />

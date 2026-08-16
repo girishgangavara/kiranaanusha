@@ -164,6 +164,27 @@ body[data-sealed="true"] {
   }
 }
 
+/* One photographic ground shared by every scene: the reference set, tinted
+   back almost to parchment so type stays legible but the warmth and grain of
+   the real silk and lamplight come through. */
+.parchment-scene {
+  background-image:
+    linear-gradient(rgba(249, 243, 231, 0.945), rgba(242, 231, 211, 0.955)),
+    url("/images/envelope/seq-05.jpg");
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.night-scene {
+  background-image:
+    linear-gradient(rgba(21, 12, 6, 0.90), rgba(27, 16, 8, 0.94)),
+    url("/images/envelope/seq-05.jpg");
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
 /* --------------------------------------------------------------- motion */
 @keyframes flicker {
   0%, 100% { opacity: 1; transform: scaleY(1); }
