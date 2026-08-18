@@ -76,6 +76,15 @@ const languageStore = {
 const getLanguageSnapshot = () => languageStore.read();
 const getServerLanguageSnapshot = (): Language => "en";
 
+/** Did the guest mute deliberately? Only then do we leave the music off. */
+function isMuted(): boolean {
+  try {
+    return window.sessionStorage.getItem(MUTE_KEY) === "true";
+  } catch {
+    return false;
+  }
+}
+
 export function InvitationProvider({ children }: { children: ReactNode }) {
   const [opened, setOpened] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
@@ -113,10 +122,31 @@ export function InvitationProvider({ children }: { children: ReactNode }) {
     // If the file has not been added yet the control simply stays inert.
     audio.addEventListener("canplaythrough", onReady);
     audio.addEventListener("loadeddata", onReady);
+
+    /* The browser can start and stop the audio on its own - a call comes in,
+       the screen locks, another app takes the audio focus. Mirror whatever it
+       actually did so the floating control never lies about the state. */
+    const onPlay = () => {
+      setMusicOn(true);
+      setMusicAvailable(true);
+    };
+    const onPause = () => setMusicOn(false);
+    /* `loop` should make this unreachable; restart anyway if a browser drops it. */
+    const onEnded = () => {
+      audio.currentTime = 0;
+      void audio.play().catch(() => {});
+    };
+    audio.addEventListener("play", onPlay);
+    audio.addEventListener("pause", onPause);
+    audio.addEventListener("ended", onEnded);
+
     audioRef.current = audio;
     return () => {
       audio.removeEventListener("canplaythrough", onReady);
       audio.removeEventListener("loadeddata", onReady);
+      audio.removeEventListener("play", onPlay);
+      audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("ended", onEnded);
       audio.pause();
       audioRef.current = null;
     };
@@ -141,14 +171,38 @@ export function InvitationProvider({ children }: { children: ReactNode }) {
   /* Opening the envelope is the user gesture that lets audio start. */
   const open = useCallback(() => {
     setOpened(true);
-    let muted = false;
-    try {
-      muted = window.sessionStorage.getItem(MUTE_KEY) === "true";
-    } catch {
-      /* ignore */
-    }
-    if (!muted) playIfWanted();
+    if (!isMuted()) playIfWanted();
   }, [playIfWanted]);
+
+  /**
+   * Keep the music running for as long as the invitation is open.
+   *
+   * Mobile browsers pause the audio whenever the page loses the foreground -
+   * the guest locks the phone, switches to WhatsApp, takes a call - and they
+   * never resume it by themselves. Pick it back up on every sign of the guest
+   * returning, unless they muted deliberately. A tap is the last resort: iOS
+   * sometimes refuses a silent resume but always allows one on a gesture.
+   */
+  useEffect(() => {
+    if (!weddingConfig.music.enabled || !opened) return;
+    const resume = () => {
+      const audio = audioRef.current;
+      if (!audio || !audio.paused || document.hidden || isMuted()) return;
+      void audio.play().catch(() => {
+        /* Still blocked - the next gesture gets another chance. */
+      });
+    };
+    document.addEventListener("visibilitychange", resume);
+    window.addEventListener("focus", resume);
+    window.addEventListener("pageshow", resume);
+    window.addEventListener("pointerdown", resume);
+    return () => {
+      document.removeEventListener("visibilitychange", resume);
+      window.removeEventListener("focus", resume);
+      window.removeEventListener("pageshow", resume);
+      window.removeEventListener("pointerdown", resume);
+    };
+  }, [opened]);
 
   const toggleMusic = useCallback(() => {
     const audio = audioRef.current;

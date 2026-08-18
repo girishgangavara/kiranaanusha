@@ -37,11 +37,13 @@ const en = {
   },
   story: {
     eyebrow: "Our Story",
-    title: "How We Found Each Other",
+    title: "It all began with our families bringing us together.",
     paragraphs: [
-      "Every story has its own beginning, and ours began with an introduction through our families. We met with open hearts, many questions, a sense of curiosity and no certainty about where the journey would take us. What started with simple conversations slowly grew into trust, comfort, and understanding.",
-      "Somewhere between shared laughter, quiet moments, and choosing each other every day, two strangers became each other's safest place. We discovered that love doesn't always arrive first; sometimes trust and companionship gently lead the way.",
-      "Looking back, it feels as though our paths were always meant to meet. Destiny introduced us, trust made us choose each other, and love quietly found its place. And now, with grateful hearts, we step into our forever together.",
+      "We met as two strangers, with a few questions, a little curiosity, and no idea where this journey would lead.",
+      "As we spent time getting to know each other, conversations turned into comfort, comfort into friendship, and friendship slowly into love.",
+      "What began as an arranged meeting became a choice we made for ourselves.",
+      "Today, with the love and blessings of our families, we’re happy to begin this beautiful journey together.",
+      "An arranged beginning, a love we found, and a forever we choose.",
     ],
   },
   family: {

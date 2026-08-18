@@ -1,4 +1,5 @@
-Background music goes here as wedding.mp3 (path set in src/config/wedding.ts).
+Background music lives here (path set in src/config/wedding.ts).
+Currently playing: marriagesong.mp3
 
 Keep it small — 1-2 MB — because most guests open this over mobile data from
 WhatsApp. Music never autoplays: it starts only after the guest taps

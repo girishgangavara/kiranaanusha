@@ -18,12 +18,12 @@ export const weddingConfig = {
 
   groom: {
     name: "Kirana K R",
-    shortName: "Kirana",
+    shortName: "Kirana K R",
   },
 
   bride: {
     name: "Anusha T S",
-    shortName: "Anusha",
+    shortName: "Anusha T S",
   },
 
   wedding: {
@@ -32,9 +32,9 @@ export const weddingConfig = {
     dayName: "Monday",
     dateLabel: "31 August 2026",
     /** Set the muhurtham time here; it also drives the countdown above. */
-    time: "ADD TIME",
+    time: "9:30 AM to 10:30 AM",
     ceremony: "Wedding Ceremony",
-    venue: "ADD VENUE",
+    venue: "Maatha Convention Hall, KB Cross, Tiptur Taluk, Tumkur District",
 
     /** The celebrations, in order. Add or remove entries freely. */
     events: [
@@ -42,17 +42,17 @@ export const weddingConfig = {
         name: "Reception",
         dayName: "Sunday",
         dateLabel: "30 August 2026",
-        time: "From 7:00 PM",
+        time: "From 7:00 PM onwards",
       },
       {
         name: "Wedding Ceremony",
         dayName: "Monday",
         dateLabel: "31 August 2026",
-        time: "ADD TIME",
+        time: "9:30 AM to 10:30 AM",
       },
     ],
     address: "Bengaluru, Karnataka",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Bengaluru+Karnataka",
+    mapsUrl: "https://maps.app.goo.gl/f3JYBa2PGtV6b1jo7",
   },
 
   contact: {
@@ -63,8 +63,8 @@ export const weddingConfig = {
 
   music: {
     enabled: true,
-    /** Track extracted from the reference invitation video. */
-    source: "/music/wedding.m4a",
+    /** Background track for the invitation. */
+    source: "/music/marriagesong.mp3",
   },
 
   gallery: [

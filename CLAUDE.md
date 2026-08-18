@@ -39,13 +39,52 @@ Used only as a design reference.
 
 - `public/music/wedding.m4a` — its audio, extracted with AVFoundation via a
   Swift script (no ffmpeg on this machine). `swift` and `sips` are the available
-  media tools; `sips` can crop/resize but cannot mask.
+  media tools; `sips` can crop/resize but cannot mask. **No longer played** —
+  the site now uses `public/music/marriagesong.mp3` (own track, 36 s, loops).
 - `public/images/envelope/seq-05.jpg`, `seq-06.jpg` — the **only two clean
   frames**. Frames at 0–4 s carry the film's burnt-in title plate; frames from
   ~7 s show the printed card, whose face reads **"Umesh S S"**.
+  **No longer used by any scene** — kept as reference only.
 
 > **Never add frames back without opening each one first.** Shipping seq-07/08
 > put the other couple's name into the opening animation on the live site.
+
+## The opening plates
+`public/images/envelope/first.jpeg` (744×1024, sealed) and `second.jpeg`
+(920×1240, open) are the owner's own artwork and carry the opening scene.
+
+- **Every line of type is painted into the image** — border, ornament, blessing,
+  names, date. `OpeningScene` letters nothing on top of them; it lights them.
+  Editing that copy means re-exporting the plates, not touching `content.ts`.
+- Consequently the plates are **English-only**, so the sealed frame no longer
+  offers the language toggle.
+- Shown `object-contain`, never cropped: they are bordered artwork and
+  `object-cover` shaves the gold frame off the edges.
+- The two are composed differently (the envelope sits at a different size and
+  angle in each), so they are cut on a **bloom that blows the frame out to
+  gold** — a plain dissolve slides one over the other visibly.
+
+### `second.jpeg` is taken apart so the card can move
+It is a flat picture with the card already out, so `OpeningScene` paints it four
+times and slides one copy. Coordinates were measured off a grid laid over the
+plate at full size (`920×1240`) and are percentages of it — which is why the
+stage is locked to **920/1240**, not to `first`:
+
+| layer | what it is |
+|---|---|
+| base | the whole plate |
+| fill | a silk-toned panel on the card's exact footprint, hiding the painted card |
+| card | the plate clipped to `inset(7.5% 18.5% 36% 18.5%)`, free to slide |
+| envelope | the plate clipped to the V of the flaps, stacked **on top** |
+
+- Card: top **7.5%**, sides **18.5% / 81.5%**. Flap corners **(11.5%, 39.5%)**
+  and **(88.5%, 44%)**, apex **(50%, 63.5%)**.
+- Travel is **37%** — enough that the card's top-left corner clears the V, which
+  it crosses at 43.9%.
+- At rest the four layers reassemble into `second.jpeg` pixel for pixel. **If you
+  re-export the plate, every number above has to be re-measured.**
+- The `fill` is the one invention: the artwork never shows what is behind the
+  card. It only ever appears while the card is in motion, under the bloom.
 
 ## Scenes (`src/app/page.tsx`)
 Opening envelope → hero → invitation card → couple → story → celebrations +
@@ -65,7 +104,7 @@ and then removed at the owner's request.
   CSS transitions, not Framer Motion — FM `initial/animate` rendered transparent
   there and was never diagnosed.
 
-## Still carrying reference-couple content
-- **Story paragraphs** in `content.ts` are the other couple's own words.
-- `venue: "ADD VENUE"` and the wedding `time: "ADD TIME"` are visible
-  placeholders; the countdown runs against a stand-in 10:00 AM IST.
+## Real details now in place
+Venue (Maatha Convention Hall, Tiptur), the 9:30–10:30 AM muhurtham, the maps
+link and the couple's own story paragraphs have all replaced the placeholders
+and the reference couple's words. Nothing in `content.ts` is borrowed any more.
