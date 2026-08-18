@@ -19,11 +19,14 @@ export const weddingConfig = {
   groom: {
     name: "Kirana K R",
     shortName: "Kirana K R",
+    /** Shown full-bleed in his own scene. Faces are never cropped or retouched. */
+    photo: "/images/couple/groom.jpg",
   },
 
   bride: {
     name: "Anusha T S",
     shortName: "Anusha T S",
+    photo: "/images/couple/bride.jpg",
   },
 
   wedding: {
@@ -34,24 +37,59 @@ export const weddingConfig = {
     /** Set the muhurtham time here; it also drives the countdown above. */
     time: "9:30 AM to 10:30 AM",
     ceremony: "Wedding Ceremony",
-    venue: "Maatha Convention Hall, KB Cross, Tiptur Taluk, Tumkur District",
+    venue: "Matha Convention Hall, KB Cross, Tiptur Taluk, Tumkur District",
 
-    /** The celebrations, in order. Add or remove entries freely. */
+    /**
+     * The celebrations, in order — each one gets its own full-screen scene.
+     *
+     * Every detail is announced ONCE, in the scene it belongs to, and nowhere
+     * else on the page. Leave a field blank and it is simply not drawn, so an
+     * hour or a hall that has not been settled yet can be added later without
+     * touching a component.
+     *
+     * `key` selects the scene's palette and its line of copy in content.ts —
+     * adding a fourth ceremony means adding both.
+     */
     events: [
       {
+        key: "haldi",
+        name: "Pre-Wedding Celebrations",
+        dayName: "Friday",
+        dateLabel: "28 August 2026",
+        time: "",
+        venue: "",
+        /** The artwork for this day. Each plate carries its own name, date and
+            hour painted in, so the scene shows them and letters nothing over
+            the top — swapping a file is how you change what the scene says.
+            Two plates here because Haldi and Mehendi share the 28th; the scene
+            fans them apart rather than giving one day two screens. */
+        plates: [
+          "/images/ceremonies/haldi.png",
+          "/images/ceremonies/mehandi.png",
+        ],
+      },
+      {
+        key: "reception",
         name: "Reception",
         dayName: "Sunday",
         dateLabel: "30 August 2026",
-        time: "From 7:00 PM onwards",
+        time: "7:00 PM onwards",
+        venue: "Matha Convention Hall, KB Cross, Tiptur Taluk, Tumkur District",
+        plates: ["/images/ceremonies/reception.png"],
       },
       {
-        name: "Wedding Ceremony",
+        key: "muhurtham",
+        name: "Muhurtham",
         dayName: "Monday",
         dateLabel: "31 August 2026",
-        time: "9:30 AM to 10:30 AM",
+        time: "9:30 AM – 10:30 AM",
+        /* Blank: the same hall as the reception, and the venue scene that
+           follows carries the full address and the map. */
+        venue: "",
+        plates: ["/images/ceremonies/mahurtham.png"],
       },
     ],
-    address: "Bengaluru, Karnataka",
+    address: "KB Cross Tipture Tq, Tumkur Dist, Karnataka",
     mapsUrl: "https://maps.app.goo.gl/f3JYBa2PGtV6b1jo7",
   },
 

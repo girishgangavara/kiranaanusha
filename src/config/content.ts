@@ -35,6 +35,11 @@ const en = {
   couple: {
     eyebrow: "The Beloved",
   },
+  /** Titles for the two portrait scenes. */
+  people: {
+    groom: "The Groom",
+    bride: "The Bride",
+  },
   story: {
     eyebrow: "Our Story",
     title: "It all began with our families bringing us together.",
@@ -62,6 +67,21 @@ const en = {
     eyebrow: "The Celebrations",
     title: "Timeline",
     ceremony: "Wedding Ceremony",
+  },
+  /** One line per ceremony, keyed by `event.key` in wedding.ts. Nothing here
+      repeats a name, a date or a venue — those live in the config and are
+      shown once, in their own scene. */
+  ceremonies: {
+    eyebrow: "The Celebrations",
+    title: "Three Days, One Beginning",
+    lead: "Each day carries its own colour and its own hour. Come to as many as you can.",
+    notes: {
+      haldi:
+        "Turmeric on our hands, laughter in the courtyard, and the blessings of everyone we love.",
+      reception:
+        "An evening to greet you, to feed you, and to celebrate before the vows.",
+      muhurtham: "The hour the knot is tied. Be with us as we begin.",
+    },
   },
   countdown: {
     eyebrow: "Counting the days",
@@ -98,6 +118,8 @@ const en = {
   },
   final: {
     together: "Together with our families, we invite you to celebrate our special day.",
+    /** The farewell. Deliberately says nothing the ceremony scenes have said. */
+    awaiting: "Come and bless us. Your being there is what will make these days ours.",
     withLove: "With Love",
     share: "Share Invitation",
     shared: "Link copied",
@@ -129,6 +151,10 @@ const kn: typeof en = {
   couple: {
     eyebrow: "ವಧು — ವರ",
   },
+  people: {
+    groom: "ವರ",
+    bride: "ವಧು",
+  },
   story: {
     eyebrow: "ನಮ್ಮ ಕಥೆ",
     title: "ನಾವು ಒಬ್ಬರನ್ನೊಬ್ಬರು ಕಂಡುಕೊಂಡ ಬಗೆ",
@@ -154,6 +180,16 @@ const kn: typeof en = {
     eyebrow: "ಸಂಭ್ರಮ",
     title: "ಕಾರ್ಯಕ್ರಮ",
     ceremony: "ವಿವಾಹ ಸಮಾರಂಭ",
+  },
+  ceremonies: {
+    eyebrow: "ಸಂಭ್ರಮ",
+    title: "ಮೂರು ದಿನ, ಒಂದು ಆರಂಭ",
+    lead: "ಪ್ರತಿ ದಿನಕ್ಕೂ ತನ್ನದೇ ಬಣ್ಣ, ತನ್ನದೇ ಘಳಿಗೆ. ಸಾಧ್ಯವಾದಷ್ಟು ಸಂಭ್ರಮಗಳಿಗೆ ಬನ್ನಿ.",
+    notes: {
+      haldi: "ಕೈಗಳಲ್ಲಿ ಅರಿಶಿನ, ಅಂಗಳದಲ್ಲಿ ನಗು, ಮತ್ತು ಪ್ರೀತಿಪಾತ್ರರೆಲ್ಲರ ಆಶೀರ್ವಾದ.",
+      reception: "ನಿಮ್ಮನ್ನು ಬರಮಾಡಿಕೊಂಡು, ಜೊತೆಯಾಗಿ ಸಂಭ್ರಮಿಸುವ ಸಂಜೆ.",
+      muhurtham: "ಗಂಟು ಬೀಳುವ ಶುಭ ಘಳಿಗೆ. ನಮ್ಮ ಆರಂಭಕ್ಕೆ ಸಾಕ್ಷಿಯಾಗಿ.",
+    },
   },
   countdown: {
     eyebrow: "ದಿನಗಣನೆ",
@@ -189,6 +225,7 @@ const kn: typeof en = {
   },
   final: {
     together: "ನಮ್ಮ ಕುಟುಂಬಗಳೊಂದಿಗೆ, ಈ ವಿಶೇಷ ದಿನವನ್ನು ಸಂಭ್ರಮಿಸಲು ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸುತ್ತೇವೆ.",
+    awaiting: "ಬಂದು ಆಶೀರ್ವದಿಸಿ. ನಿಮ್ಮ ಉಪಸ್ಥಿತಿಯೇ ಈ ದಿನಗಳಿಗೆ ಸಾರ್ಥಕತೆ.",
     withLove: "ಪ್ರೀತಿಯಿಂದ",
     share: "ಆಹ್ವಾನ ಹಂಚಿಕೊಳ್ಳಿ",
     shared: "ಲಿಂಕ್ ನಕಲಾಗಿದೆ",

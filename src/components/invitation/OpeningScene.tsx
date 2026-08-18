@@ -42,7 +42,11 @@ import { Particles } from "@/components/ui/Particles";
  * in this overlay and was never diagnosed.
  */
 
-const SEALED = "/images/envelope/first.jpeg";
+/* The sealed plate: the couple at the temple, with the envelope waiting at the
+   foot of it. It carries its own call to action ("tap to open the invitation"),
+   which is why the whole frame is the tap target and no button is drawn.
+   `first.jpeg` was the earlier, plainer version of this and is now unused. */
+const SEALED = "/images/envelope/temple-sealed.png";
 const OPENED = "/images/envelope/second.jpeg";
 
 /* The stage is locked to `second`, because `second` is the plate that gets
@@ -53,8 +57,9 @@ const OPENED = "/images/envelope/second.jpeg";
 const FRAME_W = 920;
 const FRAME_H = 1240;
 
-/** The wax seal on the sealed plate — the glow and the bloom start here. */
-const SEAL = { left: "50.8%", top: "54.3%" };
+/** The jewelled clasp on the sealed plate's envelope, measured off it at full
+    size (1024×1536). The glow gathers here and the bloom opens out of it. */
+const SEAL = { left: "49.8%", top: "84%" };
 
 /* Measured off a grid laid over the plate at full size.
 

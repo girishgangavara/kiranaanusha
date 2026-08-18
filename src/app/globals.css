@@ -241,6 +241,19 @@ body[data-sealed="true"] {
   animation: sway 6s ease-in-out infinite;
 }
 
+/* Shafts of light turning behind a ceremony scene. Very slow — it should read
+   as the light shifting in a room, never as something spinning. The wrapper
+   does the positioning so this element is free to own its transform. */
+@keyframes raysturn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rays {
+  transform-origin: 50% 30%;
+  animation: raysturn 140s linear infinite;
+}
+
 /* Focus ring that reads on both the ivory and night grounds. */
 :where(a, button, [tabindex]):focus-visible {
   outline: 2px solid var(--gold);
@@ -256,7 +269,8 @@ body[data-sealed="true"] {
 
   .flame,
   .mote,
-  .sway {
+  .sway,
+  .rays {
     animation: none !important;
   }
 

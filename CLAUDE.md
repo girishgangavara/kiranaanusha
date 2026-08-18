@@ -32,6 +32,14 @@ npx vercel promote dpl_xxx --yes   # onto the production alias
 ```
 `--prod` never spawns a worker and hangs. Redirect output to a file, not `tail`.
 
+**`deploy` can fail with `"message": "Not authorized"` even when
+`npx vercel whoami` prints `girishgangavara`.** The CLI is logged in, but the
+project belongs to the team (`orgId: team_tY4GIwaRIhTSjh8izTD0dNYw`) while the
+command runs against the personal scope. Untested fix — add the scope:
+```bash
+npx vercel deploy --yes --scope girishs-projects-ab7d0d86
+```
+
 ## The reference film
 `public/images/gallery/marriage.mp4` (51.15 s, 716×1274, 30 fps, 1 audio track)
 is a **screen recording of another couple's invitation site** (Umesh & Neethu).
@@ -49,9 +57,26 @@ Used only as a design reference.
 > **Never add frames back without opening each one first.** Shipping seq-07/08
 > put the other couple's name into the opening animation on the live site.
 
-## The opening plates
-`public/images/envelope/first.jpeg` (744×1024, sealed) and `second.jpeg`
-(920×1240, open) are the owner's own artwork and carry the opening scene.
+## The plates
+The owner supplies finished artwork, and **every line of type on it is painted
+in**. No component letters over a plate; they light them and move them.
+Editing that copy means re-exporting the image, not touching `content.ts`.
+All are English-only, which is why the sealed frame offers no language toggle.
+All are drawn `object-contain` — they are bordered artwork and `object-cover`
+shaves the gold frame off an edge.
+
+### Ceremony plates — `public/images/ceremonies/`
+`haldi.png`, `reception.png`, `mahurtham.png` (~504×1024) each carry their own
+name, date and hour. `CeremonyScene` gives each a room: dark warm ground, the
+plate's own blurred self behind it for light, turning shafts, and a
+scroll-driven push-in. The only text it adds is what the plate does **not**
+say — hence `functions: ["Mehendi"]` on the haldi entry, since the plate
+already says "Haldi".
+
+### Opening plates — `public/images/envelope/`
+`temple-sealed.png` (1024×1536, sealed, jewel at **49.8% / 84%**) and
+`second.jpeg` (920×1240, open). `first.jpeg` was the earlier, plainer sealed
+plate and is now unused.
 
 - **Every line of type is painted into the image** — border, ornament, blessing,
   names, date. `OpeningScene` letters nothing on top of them; it lights them.
@@ -87,9 +112,25 @@ stage is locked to **920/1240**, not to `first`:
   card. It only ever appears while the card is in motion, under the bloom.
 
 ## Scenes (`src/app/page.tsx`)
-Opening envelope → hero → invitation card → couple → story → celebrations +
-countdown → venue → finale. Family, RSVP and photo-gallery sections were built
-and then removed at the owner's request.
+A story that moves forward — **never the same card twice**:
+
+envelope → arch → groom → bride → couple → story → celebrations →
+haldi → reception → muhurtham (+ countdown) → venue → farewell.
+
+Family, RSVP and photo-gallery sections were built and then removed at the
+owner's request. `InvitationReveal` and `WeddingDetails` were deleted in the
+same spirit — they were the duplicate cards.
+
+> ### THE ONE RULE
+> **A name, a date, an hour or a hall appears in exactly ONE scene.**
+>
+> The invitation used to print the names on five screens, the date on five and
+> the venue on five, which is what made it read as a slideshow of one card. If
+> you add a detail to a second scene, the slideshow comes back.
+>
+> Consequences that look like bugs but are not: the hero carries no names, the
+> portrait scenes carry no dates, the venue scene carries no times, and the
+> farewell is the only signature.
 
 ## Gotchas already hit and fixed
 - **Hydration:** long floats and an inline `background` shorthand get normalised

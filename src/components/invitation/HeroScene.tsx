@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { weddingConfig } from "@/config/wedding";
 import { useInvitation } from "@/components/providers/InvitationProvider";
 import {
   GaneshaCrest,
@@ -15,17 +14,17 @@ import { OrnamentalDivider } from "@/components/ui/OrnamentalDivider";
 import { Particles } from "@/components/ui/Particles";
 
 /**
- * SCENE 02 — the hero arch.
+ * SCENE 02 — the arch, and a breath after the envelope.
  *
- * Mirrors the video's title frame: garlanded pillars, hanging lamps, a warm
- * shaft of light, the couple's names in the centre and the Kerala heritage
- * roofline at the foot. A very slow scale on the backdrop stands in for the
- * video's push-in.
+ * The garlanded pillars, hanging lamps, warm shaft of light and heritage
+ * roofline of the video's title frame. It carries the blessing and the
+ * invitation line only: the names have just been read off the opening plate,
+ * and every date belongs to the ceremony scene that announces it. Repeating
+ * them here is what made the invitation feel like one card on a loop.
  */
 export function HeroScene() {
   const { t } = useInvitation();
   const reduce = useReducedMotion();
-  const { wedding, groom, bride } = weddingConfig;
 
   return (
     <section
@@ -83,37 +82,13 @@ export function HeroScene() {
 
         <OrnamentalDivider className="mt-7" />
 
-        <motion.h1
-          className="display-name mt-7 text-5xl leading-[1.05] text-ink sm:text-6xl md:text-7xl"
-          initial={{ opacity: 0, y: reduce ? 0 : 22 }}
+        <motion.p
+          className="mt-9 max-w-sm text-[1.05rem] leading-[1.95] text-ink-soft sm:text-lg"
+          initial={{ opacity: 0, y: reduce ? 0 : 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduce ? 0.2 : 1.5, delay: reduce ? 0 : 0.5 }}
         >
-          {groom.shortName}
-          <span className="my-1 block text-2xl font-light italic text-gold sm:text-3xl">
-            &amp;
-          </span>
-          {bride.shortName}
-        </motion.h1>
-
-        <motion.p
-          className="label-caps mt-6 text-[0.6rem] text-ink-soft sm:text-xs"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: reduce ? 0 : 1 }}
-        >
-          {wedding.dayName} · {wedding.dateLabel}
-        </motion.p>
-
-        <OrnamentalDivider className="mt-6" />
-
-        <motion.p
-          className="mt-5 text-sm text-ink-soft sm:text-base"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: reduce ? 0 : 1.25 }}
-        >
-          {wedding.time}
+          {t.final.together}
         </motion.p>
       </div>
 

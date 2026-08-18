@@ -64,7 +64,7 @@ export function FloatingControls() {
         </button>
       ) : null}
 
-      {/* <button
+      <button
         type="button"
         onClick={() => setLanguage(language === "en" ? "kn" : "en")}
         className={btn}
@@ -73,7 +73,7 @@ export function FloatingControls() {
       >
         <Languages className="h-4 w-4" aria-hidden="true" />
         <span className="sr-only">{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
-      </button> */}
+      </button>
 
       <button type="button" onClick={share} className={btn} aria-label={t.final.share} title={t.final.share}>
         <Share2 className="h-4 w-4" aria-hidden="true" />

@@ -1,7 +1,6 @@
 "use client";
 
 import { useInvitation } from "@/components/providers/InvitationProvider";
-import { weddingConfig } from "@/config/wedding";
 import { Rings, Filigree } from "@/components/ui/Ornaments";
 import { SectionHeading } from "@/components/ui/OrnamentalDivider";
 import { Reveal } from "@/components/ui/Reveal";
@@ -37,17 +36,10 @@ export function StorySection() {
               ))}
             </div>
 
-            {/* signature */}
+            {/* A mark rather than a signature: the names are saved for the
+                farewell, which is the one place a signature earns its place. */}
             <Reveal delay={0.2} className="mt-10">
-              <div className="flex items-center justify-center gap-4">
-                <span className="display-name text-xl italic text-ink">
-                  {weddingConfig.groom.shortName}
-                </span>
-                <Filigree className="h-3 w-12 text-gold" />
-                <span className="display-name text-xl italic text-ink">
-                  {weddingConfig.bride.shortName}
-                </span>
-              </div>
+              <Filigree className="mx-auto h-3 w-24 text-gold" />
             </Reveal>
           </article>
         </Reveal>

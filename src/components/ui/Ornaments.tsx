@@ -211,3 +211,50 @@ export function CornerFlourish(props: SvgProps) {
     </svg>
   );
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+ * Scenery.
+ *
+ * The ceremony scenes each need their own setting, and there are no photographs
+ * of a haldi courtyard, of the hall, or of a temple to use. These draw them.
+ *
+ * Unlike the motifs above they are polychrome: a wedding scene wants marigold
+ * and rose and leaf-green, not one tint. Each takes its colours as props so a
+ * single spray can be marigold at the haldi and deep rose at the reception,
+ * which is what keeps three scenes built from the same parts looking like three
+ * different days.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+/** One rose, drawn as a coil. The building block of every spray below. */
+
+
+/** Hanging lantern with a lit wick — strung along the top of both references. */
+export function Lantern({
+  metal = "#c9a227",
+  glow = "#ffd98a",
+  className,
+  ...props
+}: SvgProps & { metal?: string; glow?: string }) {
+  return (
+    <svg viewBox="0 0 40 120" fill="none" className={className} {...base(props)}>
+      <path d="M20 0v26" stroke={metal} strokeWidth="1.6" />
+      <circle cx="20" cy="8" r="3" stroke={metal} strokeWidth="1.4" fill="none" />
+      <circle cx="20" cy="17" r="3" stroke={metal} strokeWidth="1.4" fill="none" />
+      <path d="M20 26c-7 0-11 4-11 9h22c0-5-4-9-11-9Z" fill={metal} />
+      <path d="M9 35h22l-3 42H12L9 35Z" fill={glow} opacity="0.5" />
+      <path d="M9 35h22l-3 42H12L9 35Z" stroke={metal} strokeWidth="1.7" fill="none" />
+      <path d="M14 44h12M14 56h12M14 68h12" stroke={metal} strokeWidth="1.1" opacity="0.7" />
+      <g className="flame" style={{ transformOrigin: "20px 60px" }}>
+        <ellipse cx="20" cy="58" rx="5" ry="8" fill={glow} />
+      </g>
+      <path d="M12 77h16l-2 7H14l-2-7Z" fill={metal} />
+      <path d="M20 84v7" stroke={metal} strokeWidth="1.4" />
+      <circle cx="20" cy="94" r="3.2" fill={metal} />
+    </svg>
+  );
+}
+
+
+
+
+
